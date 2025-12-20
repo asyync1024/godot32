@@ -53,11 +53,7 @@ jobs:
             lib32-openxr
             pulse-native-provider
           )
-
-          for p in "${PKG32[@]}"; do
-            echo "attempting install: $p"
-            pacman -S --noconfirm --needed "$p" || echo "package $p not found/available, skipping"
-          done
+          pacman -S --noconfirm --needed "$PKG32"
 
       - name: Create build user and set permissions
         run: |
