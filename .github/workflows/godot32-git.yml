@@ -68,10 +68,33 @@ jobs:
           useradd -m builder || true
           chown -R builder:builder "$GITHUB_WORKSPACE"
 
+      - name: Configure ccache
+        run: |
+          set -euxo pipefail
+          export CCACHE_DIR=/ccache
+          mkdir -p /ccache
+          ccache --set-config=max_size=25G
+          ccache --set-config=compiler_check=content
+          ccache --zero-stats
+
+      - name: Cache ccache
+        uses: actions/cache@v4
+        with:
+          path: /ccache
+          key: ccache-godot32-git-${{ github.ref }}
+          restore-keys: |
+            ccache-godot32-git-
+
       - name: Build package as builder
         run: |
           set -euxo pipefail
-          su - builder -c "cd $GITHUB_WORKSPACE/godot32-git && makepkg --noconfirm"
+          su - builder -c "
+          export CCACHE_DIR=/ccache &&
+          export CC='ccache gcc' &&
+          export CXX='ccache g++' &&
+          cd $GITHUB_WORKSPACE/godot32-git &&
+          makepkg --noconfirm
+          "
 
       - name: Upload built package
         uses: actions/upload-artifact@v4
