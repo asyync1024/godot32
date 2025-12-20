@@ -10,19 +10,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Enable multilib and refresh mirrors
+      - name: Enable multilib, ccache and refresh mirrors
         run: |
           set -euxo pipefail
           if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
             cat >> /etc/pacman.conf <<'EOF'
-
-          [core]
-          Include = /etc/pacman.d/mirrorlist
-          
           [multilib]
           Include = /etc/pacman.d/mirrorlist
           EOF
           fi
+          sed -i 's/!ccache/ccache/' /etc/makepkg.conf
           pacman-key --init || true
           pacman-key --populate archlinux || true
           pacman -Syu --noconfirm
@@ -31,7 +28,7 @@ jobs:
         run: |
           set -euxo pipefail
           # core build deps (ensure these are present)
-          pacman -S --noconfirm --needed base-devel git scons yasm setconf mold ccache || true
+          pacman -S --noconfirm --needed base-devel git scons yasm setconf mold ccache
 
           # install a broad set of lib32 runtime deps (pacman will skip ones not found)
           PKG32=(
@@ -73,6 +70,7 @@ jobs:
           set -euxo pipefail
           export CCACHE_DIR=/ccache
           mkdir -p /ccache
+          chown -R builder:builder /ccache
           ccache --set-config=max_size=25G
           ccache --set-config=compiler_check=content
           ccache --zero-stats
@@ -81,7 +79,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /ccache
-          key: ccache-godot32-git-${{ github.ref }}
+          key: ccache-godot32-git
           restore-keys: |
             ccache-godot32-git-
 
@@ -92,6 +90,7 @@ jobs:
           export CCACHE_DIR=/ccache &&
           export CC='ccache gcc' &&
           export CXX='ccache g++' &&
+          export CCACHE_BASEDIR=$GITHUB_WORKSPACE &&
           cd $GITHUB_WORKSPACE/godot32-git &&
           makepkg --noconfirm
           "
