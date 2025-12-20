@@ -30,6 +30,16 @@ jobs:
 
           PKG32=(
             lib32-brotli
+            lib32-freetype2
+            lib32-libglvnd
+            lib32-libtheora
+            lib32-libvorbis
+            lib32-libwebp
+            lib32-libxcursor
+            lib32-libxi
+            lib32-libxinerama
+            lib32-libxrandr
+            lib32-pcre2
             lib32-alsa-lib
             lib32-pulseaudio
             lib32-glib2
