@@ -91,6 +91,7 @@ jobs:
           export CC='ccache gcc' &&
           export CXX='ccache g++' &&
           export CCACHE_BASEDIR=$GITHUB_WORKSPACE &&
+          export MAKEFLAGS="-j$(nproc)" &&
           cd $GITHUB_WORKSPACE/godot32-git &&
           makepkg --noconfirm
           "
