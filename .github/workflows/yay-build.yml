@@ -76,7 +76,7 @@ jobs:
             su - builder -c "cd $GITHUB_WORKSPACE &&
                             git clone 'https://aur.archlinux.org/${pkg}.git' &&
                             cd ${pkg} &&
-                            makepkg -s --noconfirm"
+                            makepkg -s --noconfirm --skippgpcheck"
             cd $GITHUB_WORKSPACE/${pkg} &&
             pacman -U --noconfirm ${pkg}*
           done
