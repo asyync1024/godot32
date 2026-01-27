@@ -51,7 +51,8 @@ jobs:
             openxr \
             cmake \
             meson \
-            
+            lib32-vulkan-icd-loader \
+            vulkan-headers
           )
 
           # core build deps and packages required. (ensure these are present)
