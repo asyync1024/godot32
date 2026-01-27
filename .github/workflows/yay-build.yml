@@ -49,7 +49,8 @@ jobs:
             pulse-native-provider \
             graphite \
             libsquish \
-            openxr
+            openxr \
+            cmake
           )
 
           # core build deps and packages required. (ensure these are present)
