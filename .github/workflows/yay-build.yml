@@ -58,7 +58,7 @@ jobs:
         run: |
           sed -i "s/^PKGEXT=.*/PKGEXT='.pkg.tar.xz'/" /etc/makepkg.conf
           sed -i 's/^LDFLAGS=.*/LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now \
-                 -Wl,-z,pack-relative-relocs -fuse-ld=mold"/'
+                 -Wl,-z,pack-relative-relocs -fuse-ld=mold"/' /etc/makepkg.conf
 
       - name: Create build user and set permissions
         run: |
