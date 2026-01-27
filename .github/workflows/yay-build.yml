@@ -25,7 +25,7 @@ jobs:
 
       - name: Change package output to xz
         run: |
-          sed -i "s/^PKGEXT=.*/PKGEXT='.pkg.tar.xz'" /etc/makepkg.conf
+          sed -i "s/^PKGEXT=.*/PKGEXT='.pkg.tar.xz'/" /etc/makepkg.conf
 
       - name: Install build & runtime dependencies
         run: |
