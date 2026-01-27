@@ -64,7 +64,9 @@ jobs:
           su - builder -c "cd $GITHUB_WORKSPACE &&
                           git clone 'https://aur.archlinux.org/yay-bin.git' &&
                           cd yay-bin &&
-                          makepkg -si --noconfirm"
+                          makepkg -s --noconfirm"
+          cd $GITHUB_WORKSPACE/yay-bin &&
+          pacman -U --noconfirm yay-bin*
 
       - name: Build package as builder
         run: |
