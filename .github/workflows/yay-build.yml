@@ -28,6 +28,7 @@ jobs:
           set -euxo pipefail
 
           PKG32=(
+            ca-certificates \
             lib32-brotli \
             lib32-freetype2 \
             lib32-libglvnd \
@@ -45,6 +46,7 @@ jobs:
             pulse-native-provider \
             graphite \
             openxr \
+            miniupnpc \
             cmake \
             meson \
             lib32-vulkan-icd-loader \
@@ -72,12 +74,13 @@ jobs:
           lib32-graphite
           lib32-jsoncpp
           lib32-openxr
+          lib32-miniupnpc
           )
           for pkg in ${AUR_DEPS[@]}; do
             su - builder -c "cd $GITHUB_WORKSPACE &&
                             git clone 'https://aur.archlinux.org/${pkg}.git' &&
                             cd ${pkg} &&
-                            makepkg -s --noconfirm --skippgpcheck"
+                            makepkg --noconfirm --skippgpcheck"
             cd $GITHUB_WORKSPACE/${pkg} &&
             pacman -U --noconfirm ${pkg}*
           done
@@ -88,7 +91,7 @@ jobs:
           su - builder -c "cd $GITHUB_WORKSPACE &&
                           git clone 'https://aur.archlinux.org/godot32.git' &&
                           cd godot32 &&
-                          makepkg -s --noconfirm"
+                          makepkg --noconfirm"
 
       - name: Upload built package
         uses: actions/upload-artifact@v4
