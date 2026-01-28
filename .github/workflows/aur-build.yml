@@ -92,9 +92,10 @@ jobs:
                           git clone 'https://aur.archlinux.org/godot32.git' &&
                           cd godot32 &&
                           makepkg --noconfirm"
+          tree
 
       - name: Upload built package
         uses: actions/upload-artifact@v4
         with:
           name: godot32-pkg
-          path: "/home/builder/godot32/*.pkg.tar.xz"
+          path: "${{github.workspace}}/godot32/*.pkg.tar.xz"
