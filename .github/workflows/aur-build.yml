@@ -56,7 +56,7 @@ jobs:
           # core build deps and packages required. (ensure these are present)
           pacman -S --noconfirm --needed base-devel git scons yasm setconf "${PKG32[@]}"
 
-      - name: Change package compression to -18 and add lld to LDFLAGS
+      - name: Change package compression to -18 and disable debug in OPTIONS.
         run: |
           sed -i 's/^COMPRESSZST.*/COMPRESSZST=(zstd -c -18 -T0 --auto-threads=logical -)/' /etc/makepkg.conf
           sed -i 's/^OPTIONS=.*/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' /etc/makepkg.conf
