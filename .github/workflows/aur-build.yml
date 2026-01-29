@@ -54,13 +54,12 @@ jobs:
           )
 
           # core build deps and packages required. (ensure these are present)
-          pacman -S --noconfirm --needed base-devel git scons yasm setconf lld "${PKG32[@]}"
+          pacman -S --noconfirm --needed base-devel git scons yasm setconf "${PKG32[@]}"
 
       - name: Change package compression to -18 and add lld to LDFLAGS
         run: |
           sed -i 's/^COMPRESSZST.*/COMPRESSZST=(zstd -c -18 -T0 --auto-threads=logical -)/' /etc/makepkg.conf
           sed -i 's/^OPTIONS=.*/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' /etc/makepkg.conf
-          sed -i 's/^-Wl,-z,pack-relative-relocs.*/-Wl,-z,pack-relative-relocs -fuse-ld=lld"/' /etc/makepkg.conf
 
       - name: Create build user and set permissions
         run: |
@@ -92,7 +91,6 @@ jobs:
           su - builder -c "cd $GITHUB_WORKSPACE &&
                           git clone 'https://aur.archlinux.org/godot32.git' &&
                           cd godot32 &&
-                          sed -i '/bits=32/a \    linker=lld       # Use LLD as the linker' PKGBUILD &&
                           makepkg --noconfirm"
 
       - name: Upload built package
