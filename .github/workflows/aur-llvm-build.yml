@@ -94,7 +94,7 @@ jobs:
                           cd godot32 &&
                           sed -i 's/^\([[:space:]]*\)use_llvm=.*/\1use_llvm=yes/' PKGBUILD &&
                           sed -i '/^[[:space:]]*use_llvm=yes$/a\    linker=lld' PKGBUILD &&
-                          sed -i '/^[[:space:]]*linker=lld$/a\    lto=thin' PKGBUILD
+                          sed -i '/^[[:space:]]*linker=lld$/a\    lto=thin' PKGBUILD &&
                           makepkg --noconfirm"
 
       - name: Upload built package
