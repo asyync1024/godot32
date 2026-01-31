@@ -95,7 +95,7 @@ jobs:
                           sed -i 's/^\([[:space:]]*\)use_llvm=.*/\1use_llvm=yes/' PKGBUILD &&
                           sed -i '/^[[:space:]]*use_llvm=yes$/a\    linker=lld' PKGBUILD &&
                           sed -i '/^[[:space:]]*linker=lld$/a\    lto=thin' PKGBUILD &&
-                          sed -i 's|^\([[:space:]]*\)install -Dm755 bin/.*|\1install -Dm755 bin/godot.linuxbsd.editor.${_godot_arch}.llvm "${pkgdir}/usr/bin/godot32"|' PKGBUILD &&
+                          sed -i 's|^\([[:space:]]*\)install -Dm755 bin/.*|\1install -Dm755 bin/godot.linuxbsd.editor.\${_godot_arch}.llvm "\${pkgdir}/usr/bin/godot32"|' PKGBUILD &&
                           makepkg --noconfirm"
 
       - name: Upload built package
