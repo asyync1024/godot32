@@ -35,7 +35,7 @@ prepare() {
   sed -i 's,xmlns="https://specifications.freedesktop.org/shared-mime-info-spec",xmlns="http://www.freedesktop.org/standards/shared-mime-info",g' \
     org.godotengine.Godot.xml
 
-  patch -Np1 -i "$srcdir/enable-sse42-toggle.patch"
+  patch -Np1 -i "../enable-sse42-toggle.patch"
 }
 
 case $CARCH in
