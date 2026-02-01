@@ -55,8 +55,8 @@ build() {
 
   _args=(
     -j$(nproc --all)
-    cflags="$CFLAGS -march=x86-64 -mtune=generic -msse3 -fPIC -Wl,-z,relro,-z,now -w"
-    cxxflags="$CXXFLAGS -march=x86-64 -mtune=generic -msse3 -fPIC -Wl,-z,relro,-z,now -w"
+    cflags="$CFLAGS -march=x86-64 -mtune=generic -fPIC -Wl,-z,relro,-z,now -w"
+    cxxflags="$CXXFLAGS -march=x86-64 -mtune=generic -fPIC -Wl,-z,relro,-z,now -w"
     linkflags="$LDFLAGS"
     arch=$_CARCH
     builtin_brotli=no
