@@ -110,7 +110,7 @@ build() {
 package_godot() {
   cd $pkgbase-$pkgver-stable
 
-  install -Dm755 bin/godot.linuxbsd.editor.$_CARCH.llvm "$pkgdir/usr/bin/godot"
+  install -Dm755 bin/godot.linuxbsd.editor.$_CARCH "$pkgdir/usr/bin/godot"
 
   install -Dm644 icon.svg "$pkgdir/usr/share/pixmaps/$pkgname.svg"
   install -Dm644 misc/dist/linux/org.godotengine.Godot.desktop "$pkgdir/usr/share/applications/org.godotengine.Godot.desktop"
