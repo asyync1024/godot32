@@ -28,6 +28,8 @@ prepare() {
 
   patch -Np1 -i "../enable-sse42-toggle.patch" # Apply SSE4.2 toggle patch.
 
+  cat SConstruct
+
   # Patch for miniupnpc
   sed -i 's/addr, 16/addr, 16, nullptr, 0/g' modules/upnp/upnp.cpp
 
