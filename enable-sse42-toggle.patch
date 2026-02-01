@@ -1,5 +1,5 @@
---- SConstruct	2026-01-25 18:11:41.000000000 +0530
-+++ /home/ak/SConstruct	2026-02-01 11:01:33.245290515 +0530
+--- SConstruct	2026-02-01 15:32:50.120381737 +0530
++++ SConstruct	2026-02-01 15:33:06.727075785 +0530
 @@ -177,6 +177,7 @@
  )
  opts.Add(BoolVariable("debug_symbols", "Build with debugging symbols", False))
