@@ -42,7 +42,7 @@ jobs:
         id: pkgver
         run: |
           FILE=$(ls pkgs/*.pkg.tar.zst | head -1)
-          TAG=$(basename "$FILE" | grep -oP '\d+\.\d+-\d+(?=-x86_64)')
+          TAG=$(basename "$FILE" | grep -oP '\d+(\.\d+)*-\d+(?=-x86_64)')
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Create or update release
